@@ -1,0 +1,6 @@
+Object-oriented approach
+
+Neural_Network Class (float[]: input)
+    Input and Output Layer Arrays
+    Hidden_Layer Class
+        Node Class
