@@ -1,0 +1,13 @@
+To-Do List
+
+Neural Network Structure
+-Output nodes should not have biases
+
+Visualization
+-Display a visualization of the current neural network
+-Show weights as thicker and thinner lines
+-Take a given input and show neuron activation with a bar or color gradient
+
+Refactoring
+-Make a base node class and make output and hidden nodes abstract classes
+-Invalid number of layers/nodes handling
