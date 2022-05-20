@@ -1,4 +1,7 @@
 import numpy as np
+from time import time
+import random
+import math
 
 
 class XN_Neural_Network():
@@ -23,6 +26,9 @@ class XN_Neural_Network():
                 new_hidden_layer = Layer(nodes_per_hidden_layer, nodes_per_hidden_layer)
             self.hidden_layers.append(new_hidden_layer)
     
+    def train(self, X, Y, ):
+        pass
+
     def classify(self, input_vector: list[float]) -> list[float]:
         '''Returns the output from the neural network for the given input.'''
         inputs = input_vector
@@ -52,16 +58,24 @@ class Layer():
 
 
 class Node():
-    '''A single node/neuron within the hidden layers of the neural network.'''
+    '''A single node/neuron within the layers of the neural network.'''
     def __init__(self, num_inputs: int):
+        # FIXME OR DON'T: Can use the numpy zeroes function here
         self.weights = []
         self.bias = 0.0
         for i in range(num_inputs):
-            self.weights.append(0.0)
+            self.weights.append(random.uniform(-0.1, 0.1))
+    
+    def sigmoid(self, x):
+        # return 1 / (1 + )
+        pass
     
     def get_output(self, inputs: list[float]) -> float:
+        # # FIXME OR DON'T: With numpy can simplify this to:
+        # return np.dot(self.weights, inputs) + bias
         output = 0.0
 
+        # Dot product of weights and inputs
         for idx, val in enumerate(inputs):
             output += self.weights[idx] * val
         
@@ -75,4 +89,12 @@ the_network = XN_Neural_Network(3, 2, 3, 10)
 
 the_input = [4.0, 3.1, 5.2]
 
+count = 0
+
+initial_t = time()
+while time() - initial_t < 1.0:
+    the_network.classify(the_input)
+    count += 1
+
+print(count)
 print(the_network.classify(the_input))

@@ -3,3 +3,6 @@ Object-oriented approach
 Neural_Network Class (float[]: input)
     Layer Class
         Node Class
+
+
+-Initialize all weights within a range from -0.1 to 0.1. Don't initialize at 0.

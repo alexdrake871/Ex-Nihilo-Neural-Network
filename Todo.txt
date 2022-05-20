@@ -1,7 +1,10 @@
 To-Do List
 
 Neural Network Structure
--Output nodes should not have biases
+-Activation function and batch type/size options as parameters in NN init function
+
+Data Handling
+-Allow for full batch, mini-batch, and online training methods
 
 Visualization
 -Display a visualization of the current neural network
