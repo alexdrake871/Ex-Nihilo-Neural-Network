@@ -2,6 +2,7 @@ import numpy as np
 from time import time
 import random
 import math
+from dataset import sin_data_set
 
 
 class XN_Neural_Network():
@@ -66,9 +67,8 @@ class Node():
         for i in range(num_inputs):
             self.weights.append(random.uniform(-0.1, 0.1))
     
-    def sigmoid(self, x):
-        # return 1 / (1 + )
-        pass
+    def relu(self, x: float):
+        return max(0.0, x)
     
     def get_output(self, inputs: list[float]) -> float:
         # # FIXME OR DON'T: With numpy can simplify this to:
@@ -80,21 +80,13 @@ class Node():
             output += self.weights[idx] * val
         
         output += self.bias
-        return output
+        return self.relu(output)
 
 
 
 # For testing only
-the_network = XN_Neural_Network(3, 2, 3, 10)
 
-the_input = [4.0, 3.1, 5.2]
+the_X, the_y = sin_data_set(1000)
+features = len(the_X[0])
 
-count = 0
-
-initial_t = time()
-while time() - initial_t < 1.0:
-    the_network.classify(the_input)
-    count += 1
-
-print(count)
-print(the_network.classify(the_input))
+the_network = XN_Neural_Network()

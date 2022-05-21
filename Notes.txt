@@ -6,3 +6,9 @@ Neural_Network Class (float[]: input)
 
 
 -Initialize all weights within a range from -0.1 to 0.1. Don't initialize at 0.
+
+-sigmoid activation function: y = 1 / (1 + e^(-x))
+-RELU:
+y = x | x > 0
+  = 0 | x <= 0
+
