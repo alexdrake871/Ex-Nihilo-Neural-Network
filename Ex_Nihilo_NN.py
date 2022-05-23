@@ -49,10 +49,10 @@ class XN_Neural_Network():
         inputs = input_vector
 
         for hidden_layer in self.hidden_layers:
-            outputs = hidden_layer.get_node_outputs(inputs)
+            outputs = hidden_layer.forward(inputs)
             inputs = outputs
         
-        output_vector = self.output_layer.get_node_outputs(inputs)
+        output_vector = self.output_layer.forward(inputs)
         return output_vector
 
 
@@ -65,20 +65,25 @@ class Layer():
             new_node = Node(num_inputs, self.output_layer)
             self.nodes.append(new_node)
     
-    def get_node_outputs(self, inputs: list[float]) -> list[float]:
+    def ReLU(self, values: list[float]):
+        return [max(0.0, x) for x in values]
+    
+    def softmax(self, values: list[float]):    # 
+        E = math.e
+        zeroed_vals = [x - max(values) for x in values]
+        e_vals = [E**x for x in zeroed_vals]
+        return [x / sum(e_vals) for x in e_vals]
+
+    def forward(self, inputs: list[float]) -> list[float]:
         outputs = []
         for node in self.nodes:
             node_output = node.get_output(inputs)
             outputs.append(node_output)
         
         if not self.output_layer:   # Return the hidden layer's outputs
-            return outputs
+            return self.ReLU(outputs)
         else:                       # Return the proportional representation of output layer's outputs
-            output_sum = sum(outputs)
-            proportional_values = []
-            for val in outputs:
-                proportional_values.append(val / output_sum)
-            return proportional_values
+            return self.softmax(outputs)
 
 
 class Node():
@@ -87,16 +92,10 @@ class Node():
         # FIXME OR DON'T: Can use the numpy zeroes function here
         self.weights = []
         self.bias = 0.0
+        
         self.output_node = output_node  # Flag showing whether node is part of output layer or hidden layer
         for i in range(num_inputs):
             self.weights.append(random.uniform(-0.1, 0.1))
-    
-    def ReLU(self, x: float):
-        return max(0.0, x)
-    
-    def softmax(self, x: float):
-        E = math.e
-        return E**x
     
     def get_output(self, inputs: list[float]) -> float:
         # # FIXME OR DON'T: With numpy can simplify this to:
@@ -108,16 +107,12 @@ class Node():
             output += self.weights[idx] * val
         
         output += self.bias
-
-        # Output node uses softmax activation function while hidden layer uses ReLU
-        if self.output_node:
-            return self.softmax(output)
-        else:
-            return self.ReLU(output)
+        return output
 
 
 
 # For testing only
+random.seed(1234)
 
 the_X, the_y = sin_data_set(1000)
 features = len(the_X[0])

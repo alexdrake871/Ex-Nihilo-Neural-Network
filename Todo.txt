@@ -2,8 +2,7 @@ To-Do List
 
 Neural Network Structure
 -Activation function and batch type/size options as parameters in NN init function
---All hidden layers and output layer have activation function (output layer's might be different from the hidden layers)
--Save current output as an attribute inside object. Save both original value and after activation function.
+-Perhaps can do batching in XNNN class - just store each layer output in some array
 
 Data Handling
 -Allow for full batch, mini-batch, and online training methods

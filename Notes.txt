@@ -4,6 +4,9 @@ Neural_Network Class (float[]: input)
     Layer Class
         Node Class
 
+-THE LOSS FUNCTION OF CHOICE USED FOR CLASSIFICATION VIA SOFTMAX ACTIVATION FUNCTION IS: CATEGORICAL CROSS-ENTROPY
+
+-All hidden layers and output layer have activation function (output layer's might be different from the hidden layers)
 
 -Initialize all weights within a range from -0.1 to 0.1. Don't initialize at 0.
 
